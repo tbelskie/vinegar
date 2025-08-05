@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vinegar Dashboard - Your Mindful Spending Journey</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <div class="vinegar-dashboard">
+        <!-- Header -->
+        <header class="vinegar-dashboard-header">
+            <div class="vinegar-header-content">
+                <div class="vinegar-logo-group">
+                    <svg class="vinegar-logo" width="36" height="36" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M 25 45 L 100 155 L 175 45" 
+                              stroke="currentColor" 
+                              stroke-width="7" 
+                              fill="none"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"/>
+                        <circle cx="100" cy="170" r="8" fill="currentColor"/>
+                    </svg>
+                    <h1>Your Journey</h1>
+                </div>
+                
+                <nav class="vinegar-nav">
+                    <a href="#" class="nav-link active">Dashboard</a>
+                    <a href="options.html" class="nav-link">Settings</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="vinegar-hero">
+            <div class="vinegar-hero-content">
+                <div class="vinegar-time-saved-hero">
+                    <span class="time-saved-number" id="hero-time-saved">0</span>
+                    <span class="time-saved-unit">hours</span>
+                </div>
+                <p class="hero-subtitle">of life reclaimed</p>
+                
+                <!-- Animated breathing dot -->
+                <div class="breathing-indicator">
+                    <div class="breathing-dot"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Grid -->
+        <section class="vinegar-stats-section">
+            <div class="vinegar-container">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">⏰</div>
+                        <div class="stat-value" id="days-saved">0</div>
+                        <div class="stat-label">Days Saved</div>
+                        <div class="stat-context">That's <span id="books-read">0</span> books you could read</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">🎯</div>
+                        <div class="stat-value" id="interventions-heeded">0</div>
+                        <div class="stat-label">Wise Choices</div>
+                        <div class="stat-context">You paused and chose differently</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">📈</div>
+                        <div class="stat-value" id="streak-days">0</div>
+                        <div class="stat-label">Day Streak</div>
+                        <div class="stat-context">Consecutive days of mindfulness</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Time Visualization -->
+        <section class="vinegar-visualization">
+            <div class="vinegar-container">
+                <h2>What you chose instead of shopping</h2>
+                <div class="time-alternatives">
+                    <div class="alternative-item">
+                        <div class="alternative-visual">
+                            <div class="bar" style="width: 0%" id="bar-family"></div>
+                        </div>
+                        <div class="alternative-label">
+                            <span class="alternative-name">Time with loved ones</span>
+                            <span class="alternative-hours" id="hours-family">0 hours</span>
+                        </div>
+                    </div>
+                    
+                    <div class="alternative-item">
+                        <div class="alternative-visual">
+                            <div class="bar" style="width: 0%" id="bar-growth"></div>
+                        </div>
+                        <div class="alternative-label">
+                            <span class="alternative-name">Personal growth</span>
+                            <span class="alternative-hours" id="hours-growth">0 hours</span>
+                        </div>
+                    </div>
+                    
+                    <div class="alternative-item">
+                        <div class="alternative-visual">
+                            <div class="bar" style="width: 0%" id="bar-rest"></div>
+                        </div>
+                        <div class="alternative-label">
+                            <span class="alternative-name">Rest & reflection</span>
+                            <span class="alternative-hours" id="hours-rest">0 hours</span>
+                        </div>
+                    </div>
+                    
+                    <div class="alternative-item">
+                        <div class="alternative-visual">
+                            <div class="bar" style="width: 0%" id="bar-creation"></div>
+                        </div>
+                        <div class="alternative-label">
+                            <span class="alternative-name">Creating, not consuming</span>
+                            <span class="alternative-hours" id="hours-creation">0 hours</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reflection Quote -->
+        <section class="vinegar-reflection">
+            <div class="vinegar-container">
+                <blockquote class="reflection-quote" id="daily-quote">
+                    "The secret of happiness, you see, is not found in seeking more, but in developing the capacity to enjoy less."
+                </blockquote>
+                <cite class="quote-author">— Socrates</cite>
+            </div>
+        </section>
+
+        <!-- Actions -->
+        <section class="vinegar-actions">
+            <div class="vinegar-container">
+                <h3>Continue your journey</h3>
+                <div class="action-buttons">
+                    <button class="action-btn primary" id="close-tab">
+                        Return to life
+                    </button>
+                    <button class="action-btn secondary" id="share-progress">
+                        Share your progress
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="vinegar-dashboard-footer">
+            <p>Every moment of pause is a victory</p>
+        </footer>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>

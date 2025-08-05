@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vinegar Settings</title>
+    <link rel="stylesheet" href="options.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <div class="vinegar-settings">
+        <!-- Header -->
+        <header class="vinegar-header">
+            <div class="vinegar-header-content">
+                <div class="vinegar-header-brand">
+                    <svg class="vinegar-logo" width="36" height="36" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M 25 45 L 100 155 L 175 45" 
+                              stroke="currentColor" 
+                              stroke-width="7" 
+                              fill="none"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"/>
+                        <circle cx="100" cy="170" r="8" fill="currentColor"/>
+                    </svg>
+                    <h1>Settings</h1>
+                </div>
+            </div>
+        </header>
+
+        <!-- Tab Navigation -->
+        <nav class="vinegar-tabs">
+            <div class="vinegar-tabs-container">
+                <button class="vinegar-tab active" data-tab="sites">
+                    <svg class="tab-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>
+                        <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                        <line x1="12" y1="22.08" x2="12" y2="12"/>
+                    </svg>
+                    <span class="tab-label">Sites</span>
+                </button>
+                <button class="vinegar-tab" data-tab="preferences">
+                    <svg class="tab-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                    <span class="tab-label">Preferences</span>
+                </button>
+                <button class="vinegar-tab" data-tab="dashboard">
+                    <svg class="tab-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7"/>
+                        <rect x="14" y="3" width="7" height="7"/>
+                        <rect x="14" y="14" width="7" height="7"/>
+                        <rect x="3" y="14" width="7" height="7"/>
+                    </svg>
+                    <span class="tab-label">Dashboard</span>
+                </button>
+                <div class="vinegar-tab-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="vinegar-main">
+            <!-- Sites Tab (Now First) -->
+            <section class="vinegar-tab-content active" id="sites-tab">
+                <div class="vinegar-section">
+                    <h2>Monitored Sites</h2>
+                    <p class="section-description">
+                        Choose which shopping sites Vinegar should help you pause on.
+                    </p>
+                    
+                    <div class="quick-actions">
+                        <button class="text-btn" id="select-all">Select All</button>
+                        <button class="text-btn" id="select-none">Select None</button>
+                    </div>
+                    
+                    <div class="sites-grid" id="sites-grid">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+                
+                <!-- Custom Sites Section - Premium Feature -->
+                <div class="vinegar-section">
+                    <h2>Custom Sites 
+                        <span class="premium-badge">Premium</span>
+                    </h2>
+                    <p class="section-description">
+                        Add your own sites to monitor. Perfect for niche stores and personal shopping weaknesses.
+                    </p>
+                    
+                    <!-- Premium Gate -->
+                    <div class="premium-gate" id="custom-sites-gate">
+                        <div class="premium-gate-content">
+                            <svg class="premium-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+                            </svg>
+                            <h3>Unlock Custom Sites</h3>
+                            <p>Monitor any website with Vinegar Premium. Support mindful shopping everywhere you browse.</p>
+                            <button class="premium-cta-btn" id="upgrade-btn">
+                                Upgrade to Premium
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Custom Sites Interface (hidden for free users) -->
+                    <div class="custom-sites-interface hidden" id="custom-sites-interface">
+                        <div class="add-custom-site">
+                            <input type="text" 
+                                   id="custom-site-input" 
+                                   class="custom-site-input" 
+                                   placeholder="example.com"
+                                   pattern="^[a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9]?\.[a-zA-Z]{2,}$">
+                            <button class="add-site-btn" id="add-custom-site">
+                                Add Site
+                            </button>
+                        </div>
+                        
+                        <div class="custom-sites-list" id="custom-sites-list">
+                            <!-- Populated by JavaScript -->
+                        </div>
+                        
+                        <p class="custom-sites-hint">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="12" y1="16" x2="12" y2="12"/>
+                                <line x1="12" y1="8" x2="12.01" y2="8"/>
+                            </svg>
+                            Enter domain without www or https:// (e.g., "shopify.com")
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Blocked Sites Section -->
+                <div class="vinegar-section">
+                    <h2>Blocked Sites</h2>
+                    <p class="section-description">
+                        These sites are completely blocked. No temptation, no decisions.
+                    </p>
+                    
+                    <div class="blocked-sites" id="blocked-sites">
+                        <p class="empty-state" id="blocked-empty">No sites blocked yet</p>
+                    </div>
+                    
+                    <p class="hint">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="16" x2="12" y2="12"/>
+                            <line x1="12" y1="8" x2="12.01" y2="8"/>
+                        </svg>
+                        Click "Block" next to any monitored site to add it here.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Preferences Tab (Refined) -->
+            <section class="vinegar-tab-content" id="preferences-tab">
+                <!-- Intervention Types Section -->
+                <div class="vinegar-section">
+                    <h2>Intervention Types</h2>
+                    <p class="section-description">
+                        Choose when and how Vinegar helps you pause
+                    </p>
+                    
+                    <div class="checkbox-group">
+                        <label class="checkbox-option">
+                            <input type="checkbox" id="intervention-visit" checked>
+                            <div class="checkbox-content">
+                                <div class="checkbox-indicator">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                        <polyline points="20 6 9 17 4 12"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <div class="checkbox-title">Breathing exercise on site visits</div>
+                                    <div class="checkbox-description">A mindful pause when you arrive at shopping sites</div>
+                                </div>
+                            </div>
+                        </label>
+                        
+                        <label class="checkbox-option">
+                            <input type="checkbox" id="intervention-checkout">
+                            <div class="checkbox-content">
+                                <div class="checkbox-indicator">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                        <polyline points="20 6 9 17 4 12"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <div class="checkbox-title">Time calculation at checkout</div>
+                                    <div class="checkbox-description">See how many hours of work this purchase costs</div>
+                                </div>
+                            </div>
+                        </label>
+                        
+                        <!-- Income Sub-setting (nested under checkout) -->
+                        <div class="nested-setting" id="income-section">
+                            <div class="income-setting-header">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <polyline points="12 6 12 12 16 14"/>
+                                </svg>
+                                <span>Income for time calculations</span>
+                            </div>
+                            
+                            <div class="income-input-group">
+                                <div class="income-type-selector">
+                                    <select id="income-type" class="income-dropdown">
+                                        <option value="yearly">Yearly salary</option>
+                                        <option value="monthly">Monthly income</option>
+                                        <option value="weekly">Weekly pay</option>
+                                        <option value="hourly">Hourly rate</option>
+                                    </select>
+                                    <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none">
+                                        <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </div>
+                                
+                                <div class="income-amount-wrapper">
+                                    <span class="currency-symbol">$</span>
+                                    <input type="number" 
+                                           id="income-amount" 
+                                           class="income-amount"
+                                           placeholder="0"
+                                           min="1"
+                                           step="1"
+                                           required>
+                                    <span class="income-suffix" id="income-suffix">/year</span>
+                                </div>
+                            </div>
+                            
+                            <p class="income-helper-text">
+                                Required to calculate time cost of purchases
+                            </p>
+                            
+                            <p class="privacy-note">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                    <path d="M7 11V7a5 5 0 0110 0v4"/>
+                                </svg>
+                                This stays on your device. We never see or store your income.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="warning-message" id="no-intervention-warning">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="8" x2="12" y2="12"/>
+                            <line x1="12" y1="16" x2="12.01" y2="16"/>
+                        </svg>
+                        <span>Please select at least one intervention type</span>
+                    </div>
+                </div>
+
+                <!-- Cooldown Section -->
+                <div class="vinegar-section">
+                    <h2>Cooldown Period</h2>
+                    <p class="section-description">
+                        Time between interventions on the same site
+                    </p>
+                    
+                    <div class="cooldown-setting">
+                        <div class="cooldown-slider-container">
+                            <input type="range" 
+                                   id="cooldown-range" 
+                                   min="0" 
+                                   max="60" 
+                                   value="5"
+                                   class="cooldown-slider">
+                            <div class="cooldown-value">
+                                <input type="number" 
+                                       id="cooldown-minutes" 
+                                       min="0" 
+                                       max="60" 
+                                       value="5"
+                                       class="cooldown-input">
+                                <span class="cooldown-label">minutes</span>
+                            </div>
+                        </div>
+                        <p class="cooldown-hint">Set to 0 for intervention on every page load</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Dashboard Tab -->
+            <section class="vinegar-tab-content" id="dashboard-tab">
+                <!-- Hero Section -->
+                <section class="vinegar-hero">
+                    <div class="vinegar-hero-content">
+                        <div class="vinegar-time-saved-hero">
+                            <span class="time-saved-number" id="hero-time-saved">0</span>
+                            <span class="time-saved-unit">hours</span>
+                        </div>
+                        <p class="hero-subtitle">of life reclaimed</p>
+                        
+                        <!-- Animated breathing dot -->
+                        <div class="breathing-indicator">
+                            <div class="breathing-dot"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Stats Grid -->
+                <section class="vinegar-stats-section">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">⏰</div>
+                            <div class="stat-value" id="days-saved">0</div>
+                            <div class="stat-label">Days Saved</div>
+                            <div class="stat-context">That's <span id="books-read">0</span> books you could read</div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">🎯</div>
+                            <div class="stat-value" id="interventions-heeded">0</div>
+                            <div class="stat-label">Wise Choices</div>
+                            <div class="stat-context">You paused and chose differently</div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">📈</div>
+                            <div class="stat-value" id="streak-days">0</div>
+                            <div class="stat-label">Day Streak</div>
+                            <div class="stat-context">Consecutive days of mindfulness</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Time Visualization -->
+                <section class="vinegar-visualization">
+                    <h2>What you chose instead of shopping</h2>
+                    <div class="time-alternatives">
+                        <div class="alternative-item">
+                            <div class="alternative-visual">
+                                <div class="bar" style="width: 0%" id="bar-family"></div>
+                            </div>
+                            <div class="alternative-label">
+                                <span class="alternative-name">Time with loved ones</span>
+                                <span class="alternative-hours" id="hours-family">0 hours</span>
+                            </div>
+                        </div>
+                        
+                        <div class="alternative-item">
+                            <div class="alternative-visual">
+                                <div class="bar" style="width: 0%" id="bar-growth"></div>
+                            </div>
+                            <div class="alternative-label">
+                                <span class="alternative-name">Personal growth</span>
+                                <span class="alternative-hours" id="hours-growth">0 hours</span>
+                            </div>
+                        </div>
+                        
+                        <div class="alternative-item">
+                            <div class="alternative-visual">
+                                <div class="bar" style="width: 0%" id="bar-rest"></div>
+                            </div>
+                            <div class="alternative-label">
+                                <span class="alternative-name">Rest & reflection</span>
+                                <span class="alternative-hours" id="hours-rest">0 hours</span>
+                            </div>
+                        </div>
+                        
+                        <div class="alternative-item">
+                            <div class="alternative-visual">
+                                <div class="bar" style="width: 0%" id="bar-creation"></div>
+                            </div>
+                            <div class="alternative-label">
+                                <span class="alternative-name">Creating, not consuming</span>
+                                <span class="alternative-hours" id="hours-creation">0 hours</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Reflection Quote -->
+                <section class="vinegar-reflection">
+                    <blockquote class="reflection-quote" id="daily-quote">
+                        "The secret of happiness, you see, is not found in seeking more, but in developing the capacity to enjoy less."
+                    </blockquote>
+                    <cite class="quote-author">— Socrates</cite>
+                </section>
+
+                <!-- Actions -->
+                <section class="vinegar-actions">
+                    <h3>Continue your journey</h3>
+                    <div class="action-buttons">
+                        <button class="action-btn primary" id="close-tab">
+                            Return to life
+                        </button>
+                        <button class="action-btn secondary" id="share-progress">
+                            Share your progress
+                        </button>
+                    </div>
+                </section>
+            </section>
+
+            <!-- Save Button (Hidden on Dashboard Tab) -->
+            <div class="save-section" id="save-section">
+                <button class="save-btn" id="save-settings">
+                    <span class="save-text">Save Settings</span>
+                    <svg class="save-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                </button>
+                <p class="save-message hidden" id="save-message">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    Settings saved
+                </p>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="vinegar-footer">
+            <p>Vinegar v1.0.0 · <a href="https://usevinegar.com/privacy" target="_blank">Privacy</a> · <a href="https://usevinegar.com/help" target="_blank">Help</a></p>
+        </footer>
+    </div>
+
+    <script src="options.js"></script>
+</body>
+</html>

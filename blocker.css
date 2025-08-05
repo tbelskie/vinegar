@@ -1,0 +1,415 @@
+/* Vinegar Site Blocker - Transcendent Meditation Experience */
+
+.vinegar-blocked-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000000;
+  z-index: 2147483647;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.vinegar-blocked-overlay.show {
+  opacity: 1;
+}
+
+/* Ethereal background atmosphere */
+.vinegar-blocked-overlay::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.4) 100%);
+  pointer-events: none;
+}
+
+/* Ambient light particles */
+.vinegar-ambient-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.vinegar-ambient-light {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0;
+  animation: ambientFloat 20s ease-in-out infinite;
+}
+
+.vinegar-ambient-1 {
+  background: radial-gradient(circle, rgba(78, 205, 196, 0.1) 0%, transparent 70%);
+  top: -150px;
+  left: -150px;
+  animation-delay: 0s;
+}
+
+.vinegar-ambient-2 {
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+  bottom: -150px;
+  right: -150px;
+  animation-delay: 5s;
+}
+
+.vinegar-ambient-3 {
+  background: radial-gradient(circle, rgba(255, 107, 107, 0.05) 0%, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation-delay: 10s;
+}
+
+@keyframes ambientFloat {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0.8) translate(0, 0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2) translate(50px, -30px);
+  }
+}
+
+/* Main container */
+.vinegar-blocked-container {
+  text-align: center;
+  padding: 60px;
+  max-width: 100%;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* Opening sequence */
+.vinegar-blocked-reveal {
+  opacity: 0;
+  animation: blockedReveal 2s cubic-bezier(0.4, 0, 0.2, 1) 0.5s forwards;
+}
+
+@keyframes blockedReveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Central meditation circle */
+.vinegar-meditation-circle {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  margin-bottom: 60px;
+  opacity: 0;
+  animation: circleReveal 1.5s cubic-bezier(0.4, 0, 0.2, 1) 1s forwards;
+}
+
+@keyframes circleReveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) rotate(-90deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* Outer rings */
+.vinegar-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  animation: ringPulse 4s ease-in-out infinite;
+}
+
+.vinegar-ring-1 {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  animation-delay: 0s;
+}
+
+.vinegar-ring-2 {
+  width: 120%;
+  height: 120%;
+  top: -10%;
+  left: -10%;
+  animation-delay: 0.5s;
+}
+
+.vinegar-ring-3 {
+  width: 140%;
+  height: 140%;
+  top: -20%;
+  left: -20%;
+  animation-delay: 1s;
+}
+
+@keyframes ringPulse {
+  0%, 100% {
+    opacity: 0.1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(1.05);
+  }
+}
+
+/* Central logo orb - PROPERLY SIZED AND CENTERED */
+.vinegar-logo-orb {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(78, 205, 196, 0.1) 0%, rgba(78, 205, 196, 0.02) 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  box-shadow: 
+    0 0 60px rgba(78, 205, 196, 0.2),
+    inset 0 0 30px rgba(78, 205, 196, 0.1);
+}
+
+.vinegar-logo-orb svg {
+  width: 100%;
+  height: 100%;
+  color: #4ECDC4;
+  filter: drop-shadow(0 0 25px rgba(78, 205, 196, 0.5));
+  animation: logoFloat 6s ease-in-out infinite;
+  display: block;
+  transform: scale(0.6); /* Scale down the entire SVG to fit properly */
+}
+
+@keyframes logoFloat {
+  0%, 100% {
+    transform: translateY(0) scale(0.6);
+  }
+  50% {
+    transform: translateY(-5px) scale(0.6);
+  }
+}
+
+/* Message section */
+.vinegar-message-section {
+  max-width: 600px;
+  opacity: 0;
+  animation: messageReveal 1.5s cubic-bezier(0.4, 0, 0.2, 1) 2s forwards;
+}
+
+@keyframes messageReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.vinegar-blocked-title {
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.vinegar-site-name {
+  font-size: 36px;
+  font-weight: 200;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 60px;
+  letter-spacing: -0.5px;
+  position: relative;
+}
+
+/* Breathing line separator */
+.vinegar-separator {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  margin: 0 auto 60px;
+  position: relative;
+  overflow: visible;
+}
+
+.vinegar-separator::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+  animation: separatorGlow 3s ease-in-out infinite;
+}
+
+@keyframes separatorGlow {
+  0%, 100% {
+    opacity: 0;
+    transform: scaleX(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleX(1.5);
+  }
+}
+
+/* Zen quote */
+.vinegar-wisdom {
+  font-size: 24px;
+  font-style: italic;
+  font-weight: 200;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.8;
+  margin-bottom: 80px;
+  padding: 0 40px;
+  position: relative;
+  opacity: 0;
+  animation: wisdomReveal 1.5s cubic-bezier(0.4, 0, 0.2, 1) 2.5s forwards;
+}
+
+@keyframes wisdomReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Action button - Premium feel */
+.vinegar-action-container {
+  opacity: 0;
+  animation: actionReveal 1.5s cubic-bezier(0.4, 0, 0.2, 1) 3s forwards;
+}
+
+@keyframes actionReveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.vinegar-sanctuary-btn {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 20px 60px;
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+.vinegar-sanctuary-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translate(-50%, -50%);
+  transition: width 0.8s ease, height 0.8s ease;
+}
+
+.vinegar-sanctuary-btn:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 1);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 40px rgba(255, 255, 255, 0.1);
+}
+
+.vinegar-sanctuary-btn:hover::before {
+  width: 400px;
+  height: 400px;
+}
+
+/* Mobile refinements */
+@media (max-width: 640px) {
+  .vinegar-blocked-container {
+    padding: 40px 30px;
+  }
+  
+  .vinegar-meditation-circle {
+    width: 160px;
+    height: 160px;
+    margin-bottom: 40px;
+  }
+  
+  .vinegar-logo-orb {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .vinegar-logo-orb svg {
+    transform: scale(0.55);
+  }
+  
+  .vinegar-site-name {
+    font-size: 28px;
+    margin-bottom: 40px;
+  }
+  
+  .vinegar-wisdom {
+    font-size: 20px;
+    margin-bottom: 60px;
+    padding: 0 20px;
+  }
+  
+  .vinegar-sanctuary-btn {
+    padding: 16px 40px;
+    font-size: 13px;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+  }
+}

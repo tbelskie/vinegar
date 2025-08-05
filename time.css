@@ -1,0 +1,572 @@
+/* Vinegar Time Intervention - Premium Meditation-Inspired Design */
+
+.vinegar-time-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000000;
+  z-index: 2147483647;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.vinegar-time-overlay.show {
+  opacity: 1;
+}
+
+/* Subtle animated background */
+.vinegar-time-overlay::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.4) 100%);
+  pointer-events: none;
+}
+
+/* Container */
+.vinegar-time-container {
+  padding: 60px;
+  max-width: 600px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* Detecting State - Matching breathing orb aesthetic */
+.vinegar-time-detecting {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  animation: detectingFadeIn 0.8s ease;
+}
+
+@keyframes detectingFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Meditation orb for detecting */
+.vinegar-time-orb {
+  width: 160px;
+  height: 160px;
+  position: relative;
+}
+
+.vinegar-orb-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  animation: orbRingPulse 3s ease-in-out infinite;
+}
+
+.vinegar-orb-ring-1 {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  animation-delay: 0s;
+}
+
+.vinegar-orb-ring-2 {
+  width: 120%;
+  height: 120%;
+  top: -10%;
+  left: -10%;
+  animation-delay: 0.5s;
+}
+
+.vinegar-orb-ring-3 {
+  width: 140%;
+  height: 140%;
+  top: -20%;
+  left: -20%;
+  animation-delay: 1s;
+}
+
+@keyframes orbRingPulse {
+  0%, 100% {
+    opacity: 0.1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(1.05);
+  }
+}
+
+.vinegar-orb-center {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(78, 205, 196, 0.1) 0%, rgba(78, 205, 196, 0.02) 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  box-shadow: 
+    0 0 60px rgba(78, 205, 196, 0.2),
+    inset 0 0 30px rgba(78, 205, 196, 0.1);
+}
+
+.vinegar-orb-center.warning {
+  background: radial-gradient(circle, rgba(255, 107, 107, 0.15) 0%, rgba(255, 107, 107, 0.03) 100%);
+  box-shadow: 
+    0 0 60px rgba(255, 107, 107, 0.3),
+    inset 0 0 30px rgba(255, 107, 107, 0.1);
+}
+
+.vinegar-orb-center svg {
+  width: 60%;
+  height: 60%;
+  color: #4ECDC4;
+  filter: drop-shadow(0 0 20px rgba(78, 205, 196, 0.5));
+  animation: orbFloat 6s ease-in-out infinite;
+}
+
+@keyframes orbFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.vinegar-detecting-text {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 300;
+  letter-spacing: 1px;
+  animation: textPulse 2s ease-in-out infinite;
+}
+
+@keyframes textPulse {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+/* Manual Input State - Premium Minimal Design */
+.vinegar-time-manual {
+  animation: manualFadeIn 0.8s ease;
+}
+
+@keyframes manualFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.vinegar-time-question {
+  margin-bottom: 60px;
+}
+
+.vinegar-time-question h2 {
+  font-size: 48px;
+  font-weight: 200;
+  color: rgba(255, 255, 255, 0.95);
+  margin-bottom: 16px;
+  letter-spacing: -1px;
+  line-height: 1.2;
+}
+
+.vinegar-time-question p {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+
+/* Amount Input Group */
+.vinegar-time-input-group {
+  margin-bottom: 40px;
+}
+
+.vinegar-amount-field {
+  position: relative;
+  display: inline-block;
+  margin: 0 auto;
+}
+
+.vinegar-currency-symbol {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 48px;
+  color: rgba(255, 255, 255, 0.3);
+  font-weight: 200;
+  pointer-events: none;
+}
+
+.vinegar-amount-input {
+  font-size: 72px;
+  font-weight: 100;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.95);
+  text-align: center;
+  width: 300px;
+  padding: 20px 20px 20px 60px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  outline: none;
+  letter-spacing: -2px;
+}
+
+.vinegar-amount-input:focus {
+  border-bottom-color: rgba(78, 205, 196, 0.6);
+}
+
+.vinegar-amount-input::placeholder {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+/* Remove spinner buttons */
+.vinegar-amount-input::-webkit-inner-spin-button,
+.vinegar-amount-input::-webkit-outer-spin-button {
+  appearance: none;
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.vinegar-amount-input[type=number] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+/* Shake animation for empty input */
+.vinegar-amount-field.shake {
+  animation: shake 0.3s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+/* Quick Amount Buttons */
+.vinegar-quick-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 60px;
+}
+
+.vinegar-quick-btn {
+  padding: 12px 32px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  letter-spacing: 0.5px;
+}
+
+.vinegar-quick-btn:hover {
+  border-color: rgba(78, 205, 196, 0.6);
+  color: rgba(78, 205, 196, 0.9);
+  background: rgba(78, 205, 196, 0.05);
+  transform: translateY(-2px);
+}
+
+/* Calculate Button */
+.vinegar-calculate-btn {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 20px 60px;
+  font-size: 14px;
+  font-weight: 300;
+  cursor: pointer;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: inherit;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+.vinegar-calculate-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(78, 205, 196, 0.1);
+  transform: translate(-50%, -50%);
+  transition: width 0.8s ease, height 0.8s ease;
+}
+
+.vinegar-calculate-btn:hover {
+  border-color: rgba(78, 205, 196, 0.6);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 40px rgba(78, 205, 196, 0.2);
+}
+
+.vinegar-calculate-btn:hover::before {
+  width: 400px;
+  height: 400px;
+}
+
+/* Result State - Dramatic Reveal */
+.vinegar-time-reveal {
+  animation: revealSequence 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes revealSequence {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(40px);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.02) translateY(0);
+  }
+  100% {
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Result Orb */
+.vinegar-result-orb {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  margin: 0 auto 60px;
+}
+
+.vinegar-time-number {
+  font-size: 56px;
+  font-weight: 700;
+  color: #FF6B6B;
+  letter-spacing: -2px;
+  text-shadow: 0 0 40px rgba(255, 107, 107, 0.5);
+  animation: numberGlow 3s ease-in-out infinite;
+}
+
+@keyframes numberGlow {
+  0%, 100% {
+    text-shadow: 0 0 40px rgba(255, 107, 107, 0.5);
+  }
+  50% {
+    text-shadow: 0 0 60px rgba(255, 107, 107, 0.8);
+  }
+}
+
+/* Time Message */
+.vinegar-time-message {
+  margin-bottom: 60px;
+}
+
+.vinegar-time-message h2 {
+  font-size: 36px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.95);
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+
+.vinegar-time-message p {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 300;
+}
+
+/* Context Grid */
+.vinegar-time-context-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 32px;
+  margin-bottom: 80px;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+}
+
+.vinegar-context-item {
+  text-align: center;
+}
+
+.vinegar-context-value {
+  font-size: 36px;
+  font-weight: 200;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 8px;
+  letter-spacing: -1px;
+}
+
+.vinegar-context-label {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Actions - Clear Hierarchy */
+.vinegar-time-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+.vinegar-action-primary,
+.vinegar-action-secondary {
+  padding: 20px 60px;
+  font-size: 14px;
+  font-weight: 300;
+  border: none;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: inherit;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  min-width: 300px;
+}
+
+.vinegar-action-primary {
+  background: rgba(78, 205, 196, 0.9);
+  color: #000;
+  position: relative;
+  overflow: hidden;
+}
+
+.vinegar-action-primary::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+.vinegar-action-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px rgba(78, 205, 196, 0.3);
+}
+
+.vinegar-action-primary:hover::after {
+  width: 400px;
+  height: 400px;
+}
+
+.vinegar-action-secondary {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  padding: 10px 20px;
+  min-width: auto;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+.vinegar-action-secondary:hover {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Mobile Responsive */
+@media (max-width: 640px) {
+  .vinegar-time-container {
+    padding: 40px 30px;
+  }
+  
+  .vinegar-time-question h2 {
+    font-size: 36px;
+  }
+  
+  .vinegar-amount-input {
+    font-size: 48px;
+    width: 240px;
+  }
+  
+  .vinegar-currency-symbol {
+    font-size: 36px;
+  }
+  
+  .vinegar-time-orb,
+  .vinegar-result-orb {
+    width: 140px;
+    height: 140px;
+  }
+  
+  .vinegar-orb-center {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .vinegar-time-number {
+    font-size: 40px;
+  }
+  
+  .vinegar-time-message h2 {
+    font-size: 28px;
+  }
+  
+  .vinegar-time-context-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 24px;
+  }
+  
+  .vinegar-context-value {
+    font-size: 28px;
+  }
+  
+  .vinegar-action-primary,
+  .vinegar-action-secondary {
+    min-width: 100%;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

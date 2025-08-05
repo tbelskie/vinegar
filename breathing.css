@@ -1,0 +1,751 @@
+/* Vinegar Breathing Exercise - Pure Visual Meditation */
+
+.vinegar-breathing-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000000;
+  z-index: 2147483647;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.vinegar-breathing-overlay.show {
+  opacity: 1;
+}
+
+/* Subtle animated background texture */
+.vinegar-breathing-overlay::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.4) 100%);
+  pointer-events: none;
+}
+
+.vinegar-breathing-container {
+  text-align: center;
+  padding: 40px;
+  max-width: 100%;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* Timer - Minimal circular progress */
+.vinegar-timer-ring {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  width: 60px;
+  height: 60px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.6s ease;
+}
+
+.vinegar-timer-ring.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.vinegar-timer-svg {
+  transform: rotate(-90deg);
+  width: 60px;
+  height: 60px;
+}
+
+.vinegar-timer-circle {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.1);
+  stroke-width: 2;
+}
+
+.vinegar-timer-progress {
+  fill: none;
+  stroke: rgba(78, 205, 196, 0.6);
+  stroke-width: 2;
+  stroke-dasharray: 188.4; /* 2πr where r=30 */
+  stroke-dashoffset: 188.4;
+  transition: stroke-dashoffset 60s linear;
+}
+
+.vinegar-timer-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.6);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Intro Screen with Quote */
+.vinegar-breathing-intro {
+  animation: fadeInUp 1s ease;
+  max-width: 600px;
+}
+
+.vinegar-quote {
+  font-size: 24px;
+  font-weight: 200;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+  margin-bottom: 40px;
+  letter-spacing: 0.5px;
+}
+
+.vinegar-quote-author {
+  display: block;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 16px;
+  font-style: normal;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.vinegar-breathing-intro h2 {
+  font-size: 36px;
+  font-weight: 200;
+  margin-bottom: 48px;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: -0.5px;
+  line-height: 1.3;
+}
+
+/* Countdown */
+.vinegar-countdown {
+  display: none;
+  font-size: 120px;
+  font-weight: 100;
+  color: rgba(255, 255, 255, 0.9);
+  font-variant-numeric: tabular-nums;
+  animation: countdownPulse 1s ease;
+}
+
+@keyframes countdownPulse {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.2);
+  }
+}
+
+.vinegar-start-button {
+  padding: 20px 60px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0;
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.vinegar-start-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.vinegar-start-button:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+.vinegar-start-button:hover::before {
+  left: 0;
+}
+
+/* Main Breathing Visualization */
+.vinegar-breathing-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  height: 600px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  animation: fadeIn 1.5s ease forwards;
+}
+
+/* Environmental particles - these do the breathing motion */
+.vinegar-environment {
+  position: absolute;
+  width: 120%;
+  height: 120%;
+  top: -10%;
+  left: -10%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.vinegar-float {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(78, 205, 196, 0.03) 0%, transparent 70%);
+  filter: blur(40px);
+}
+
+.vinegar-float-1 {
+  top: 10%;
+  left: 10%;
+  animation: gentleFloat1 20s ease-in-out infinite;
+}
+
+.vinegar-float-2 {
+  top: 60%;
+  right: 15%;
+  animation: gentleFloat2 25s ease-in-out infinite;
+}
+
+.vinegar-float-3 {
+  bottom: 20%;
+  left: 20%;
+  animation: gentleFloat3 22s ease-in-out infinite;
+}
+
+/* Breathing rhythm particles - new! */
+.vinegar-breath-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  opacity: 0;
+}
+
+.vinegar-breath-particle.inhale {
+  animation: particleInhale 4s ease-out;
+}
+
+.vinegar-breath-particle.exhale {
+  animation: particleExhale 4s ease-in;
+}
+
+@keyframes particleInhale {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0);
+  }
+  20% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--tx), var(--ty)) scale(1);
+  }
+}
+
+@keyframes particleExhale {
+  0% {
+    opacity: 0;
+    transform: translate(var(--tx), var(--ty)) scale(1);
+  }
+  20% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0);
+  }
+}
+
+@keyframes gentleFloat1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -20px) scale(1.1); }
+  66% { transform: translate(-20px, 30px) scale(0.9); }
+}
+
+@keyframes gentleFloat2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-40px, 20px) scale(1.2); }
+}
+
+@keyframes gentleFloat3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(20px, 20px) scale(0.8); }
+  75% { transform: translate(-30px, -10px) scale(1.1); }
+}
+
+/* Central Breathing Orb - Now static with internal animation */
+.vinegar-breathing-orb {
+  width: 300px;
+  height: 300px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Multiple glow layers that pulse with breathing */
+.vinegar-orb-outer-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 150%;
+  height: 150%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.02) 0%, transparent 60%);
+  border-radius: 50%;
+  opacity: 0.3;
+  transition: opacity 4s ease-in-out;
+}
+
+.vinegar-orb-outer-glow.bright {
+  opacity: 0.8;
+}
+
+.vinegar-orb-inner-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(circle, rgba(78, 205, 196, 0.05) 0%, transparent 50%);
+  border-radius: 50%;
+  filter: blur(30px);
+  opacity: 0.3;
+  transition: opacity 4s ease-in-out;
+}
+
+.vinegar-orb-inner-glow.bright {
+  opacity: 0.8;
+}
+
+.vinegar-orb-core {
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02));
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  /* Remove the transform scaling - keep it static */
+  transform: scale(1);
+}
+
+/* Inner pulse ring that expands/contracts */
+.vinegar-orb-pulse {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(78, 205, 196, 0.3);
+  border-radius: 50%;
+  opacity: 0;
+}
+
+.vinegar-orb-pulse.active {
+  animation: orbPulse 4s ease-out;
+}
+
+@keyframes orbPulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+}
+
+/* Breathing Text with Phase Indicator */
+.vinegar-breathing-guide {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.vinegar-breathing-text {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  user-select: none;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  margin-bottom: 8px;
+}
+
+.vinegar-breathing-counter {
+  color: rgba(78, 205, 196, 0.6);
+  font-size: 48px;
+  font-weight: 100;
+  font-variant-numeric: tabular-nums;
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+
+/* Breathing states - only affect internal elements */
+.vinegar-orb-core.inhale .vinegar-breathing-text,
+.vinegar-orb-core.hold .vinegar-breathing-text,
+.vinegar-orb-core.exhale .vinegar-breathing-text {
+  opacity: 1;
+}
+
+.vinegar-orb-core.inhale .vinegar-breathing-counter {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.vinegar-orb-core.hold .vinegar-breathing-counter {
+  opacity: 0.7;
+  transform: scale(1);
+}
+
+.vinegar-orb-core.exhale .vinegar-breathing-counter {
+  opacity: 0.5;
+  transform: scale(0.9);
+}
+
+/* Phase Progress Ring */
+.vinegar-phase-ring {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 120px;
+}
+
+.vinegar-phase-svg {
+  width: 120px;
+  height: 120px;
+  transform: rotate(-90deg);
+}
+
+.vinegar-phase-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.05);
+  stroke-width: 1;
+}
+
+.vinegar-phase-progress {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.2);
+  stroke-width: 1;
+  stroke-dasharray: 377; /* 2πr where r=60 */
+  stroke-dashoffset: 377;
+  transition: stroke-dashoffset 4s linear;
+}
+
+.vinegar-phase-progress.active {
+  stroke-dashoffset: 0;
+}
+
+/* Complete Screen */
+.vinegar-breathing-complete {
+  display: none;
+  animation: fadeIn 1.2s ease;
+  max-width: 600px;
+}
+
+.vinegar-breathing-complete h3 {
+  font-size: 36px;
+  font-weight: 200;
+  margin-bottom: 20px;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: -0.5px;
+}
+
+.vinegar-complete-subtitle {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 40px;
+  font-weight: 300;
+}
+
+/* Reflection points */
+.vinegar-reflection-list {
+  text-align: left;
+  margin: 0 auto 40px;
+  max-width: 450px;
+}
+
+.vinegar-reflection-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 24px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 16px;
+  line-height: 1.6;
+  opacity: 0;
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.vinegar-reflection-item:nth-child(1) { animation-delay: 0.2s; }
+.vinegar-reflection-item:nth-child(2) { animation-delay: 0.4s; }
+.vinegar-reflection-item:nth-child(3) { animation-delay: 0.6s; }
+.vinegar-reflection-item:nth-child(4) { animation-delay: 0.8s; }
+
+.vinegar-reflection-dot {
+  width: 6px;
+  height: 6px;
+  background: rgba(78, 205, 196, 0.6);
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 8px;
+}
+
+/* Skip Screen */
+.vinegar-breathing-skip {
+  display: none;
+  animation: fadeIn 1.2s ease;
+  max-width: 600px;
+}
+
+.vinegar-breathing-skip h3 {
+  font-size: 36px;
+  font-weight: 200;
+  margin-bottom: 20px;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: -0.5px;
+}
+
+.vinegar-skip-subtitle {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 40px;
+  font-weight: 300;
+}
+
+/* Skip reasons - more minimal */
+.vinegar-skip-reasons {
+  text-align: left;
+  margin: 0 auto 40px;
+  max-width: 450px;
+}
+
+.vinegar-skip-reason {
+  margin-bottom: 24px;
+  padding-left: 24px;
+  color: rgba(255, 107, 107, 0.8);
+  font-size: 16px;
+  line-height: 1.6;
+  position: relative;
+}
+
+.vinegar-skip-reason::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: rgba(255, 107, 107, 0.4);
+}
+
+/* Action Buttons */
+.vinegar-breathing-actions {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.vinegar-breathing-btn {
+  padding: 18px 48px;
+  border-radius: 0;
+  font-size: 14px;
+  font-weight: 300;
+  border: none;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: inherit;
+  min-width: 200px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+}
+
+.vinegar-breathing-btn-leave {
+  background: rgba(255, 255, 255, 0.9);
+  color: #000;
+}
+
+.vinegar-breathing-btn-leave::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(78, 205, 196, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+.vinegar-breathing-btn-leave:hover::after {
+  width: 300px;
+  height: 300px;
+}
+
+.vinegar-breathing-btn-continue {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.vinegar-breathing-btn-continue:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.vinegar-breathing-btn-retry {
+  background: transparent;
+  color: rgba(78, 205, 196, 0.8);
+  border: 1px solid rgba(78, 205, 196, 0.4);
+}
+
+.vinegar-breathing-btn-retry:hover {
+  background: rgba(78, 205, 196, 0.1);
+  border-color: rgba(78, 205, 196, 0.6);
+}
+
+/* Skip button */
+.vinegar-skip-breathing {
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+  padding: 8px 16px;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 12px;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.vinegar-skip-breathing.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.vinegar-skip-breathing:hover {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { 
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile Optimizations */
+@media (max-width: 480px) {
+  .vinegar-quote {
+    font-size: 20px;
+  }
+  
+  .vinegar-breathing-intro h2 {
+    font-size: 28px;
+  }
+  
+  .vinegar-countdown {
+    font-size: 80px;
+  }
+  
+  .vinegar-breathing-orb {
+    width: 240px;
+    height: 240px;
+  }
+  
+  .vinegar-breathing-counter {
+    font-size: 36px;
+  }
+  
+  .vinegar-breathing-actions {
+    flex-direction: column;
+    width: 100%;
+    padding: 0 20px;
+  }
+  
+  .vinegar-breathing-btn {
+    width: 100%;
+  }
+  
+  .vinegar-timer-ring {
+    top: 20px;
+    right: 20px;
+  }
+  
+  .vinegar-breathing-complete h3,
+  .vinegar-breathing-skip h3 {
+    font-size: 28px;
+  }
+  
+  .vinegar-reflection-list,
+  .vinegar-skip-reasons {
+    padding: 0 20px;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

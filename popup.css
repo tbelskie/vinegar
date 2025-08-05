@@ -1,0 +1,223 @@
+/* Vinegar Popup - Unified Design System */
+
+:root {
+    --obsidian: #000000;
+    --parchment: #FAFAF8;
+    --viridian: #4ECDC4;
+    --vermillion: #FF6B6B;
+    --gray-700: #333333;
+    --gray-500: #666666;
+    --gray-400: #999999;
+    --gray-300: #999999;
+    --gray-100: #E0E0E0;
+    --gray-50: #F5F5F3;
+    --space-1: 8px;
+    --space-2: 16px;
+    --space-3: 24px;
+    --space-4: 32px;
+    --space-6: 48px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--obsidian);
+    background: var(--parchment);
+    width: 360px;
+    height: 480px; /* Fixed height for consistency */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.vinegar-popup {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Popup State Container */
+.popup-state {
+    padding: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    animation: fadeIn 0.6s ease;
+}
+
+/* Header - Shared between states */
+.header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    margin-bottom: var(--space-3);
+}
+
+.logo-small {
+    width: 32px;
+    height: 32px;
+    color: var(--obsidian);
+}
+
+h2 {
+    font-size: 18px;
+    font-weight: 300;
+    letter-spacing: -0.3px;
+}
+
+/* Onboarding Message */
+.onboarding-message {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-4) 0;
+}
+
+.onboarding-message p {
+    font-size: 24px;
+    font-weight: 200;
+    color: var(--gray-700);
+    text-align: center;
+    line-height: 1.4;
+    letter-spacing: -0.5px;
+}
+
+/* Time Display - Active state only */
+.time-saved-display {
+    background: white;
+    border-radius: 12px;
+    padding: var(--space-3);
+    text-align: center;
+    margin-bottom: var(--space-3);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.time-value {
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--viridian);
+    letter-spacing: -1px;
+    line-height: 1;
+}
+
+.time-label {
+    font-size: 14px;
+    color: var(--gray-500);
+    margin-top: var(--space-1);
+}
+
+/* Buttons - Unified styling */
+.primary-btn,
+.secondary-btn {
+    width: 100%;
+    padding: var(--space-2);
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+    margin-bottom: var(--space-2);
+    border: none;
+}
+
+.primary-btn {
+    background: var(--obsidian);
+    color: var(--parchment);
+    position: relative;
+    overflow: hidden;
+}
+
+.primary-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.primary-btn:hover::before {
+    left: 100%;
+}
+
+.primary-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.secondary-btn {
+    background: white;
+    color: var(--obsidian);
+    border: 1px solid var(--gray-100);
+}
+
+.secondary-btn:hover {
+    background: var(--gray-50);
+    border-color: var(--gray-300);
+}
+
+/* Social Links - Shared between states */
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-2);
+    margin-top: auto;
+    padding-top: var(--space-2);
+    border-top: 1px solid var(--gray-100);
+}
+
+.social-link {
+    color: var(--gray-400);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+}
+
+.social-link:hover {
+    color: var(--gray-700);
+    transform: translateY(-1px);
+}
+
+.social-link svg {
+    width: 14px;
+    height: 14px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Utilities */
+.hidden {
+    display: none !important;
+}
+
+/* Focus states */
+button:focus-visible {
+    outline: 2px solid var(--obsidian);
+    outline-offset: 2px;
+}
