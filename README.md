@@ -78,8 +78,9 @@ vinegar/
 
 ## Version History
 
-- **v1.0.0** (Current) - Latest stable version with enhanced cart detection
-- Previous versions (0.1 - 0.6.7) archived in `vinegar-archive-v0.1-to-v0.6.7.zip`
+- **v1.0.0** (Current) - Initial public release with core features complete
+  - Known issues exist and are being tracked for v1.1 release
+- Previous versions (0.1 - 0.6.8) archived in `vinegar-archive-v0.1-to-v0.6.7.zip`
 
 ## Privacy
 
