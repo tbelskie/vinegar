@@ -2,6 +2,8 @@
 
 A Chrome extension that helps users reduce impulsive online shopping by creating mindful pauses and interventions.
 
+> **🤖 Built with AI**: This project was developed entirely using Claude AI and refactored/organized using Claude Code. See [CLAUDE-CODE-TESTING.md](CLAUDE-CODE-TESTING.md) for details on the AI-assisted development process.
+
 ## Overview
 
 Vinegar is your anti-shopping assistant that converts shopping impulses into saved time. It creates gentle interventions when you visit shopping sites or add items to your cart, encouraging mindful spending decisions.
@@ -90,13 +92,26 @@ Vinegar operates entirely locally on your device:
 - All settings stored in Chrome's local storage
 - No account required
 
+## AI Development
+
+This entire Chrome extension was built using Claude AI:
+- **Initial Development**: All code written through conversations with Claude AI
+- **Project Organization**: Refactored from 15+ version folders to clean structure using Claude Code
+- **Bug Discovery**: 7 critical issues identified through AI code analysis
+- **Documentation**: All docs generated via AI assistance
+
+For a detailed case study on AI-assisted development, see:
+- [CLAUDE-CODE-TESTING.md](CLAUDE-CODE-TESTING.md) - Project transformation results
+- [docs/workflow.md](docs/workflow.md) - AI workflow documentation
+- [docs/context-management.md](docs/context-management.md) - How AI maintains context
+
 ## Contributing
 
 Contributions are welcome! Please feel free to submit pull requests or open issues for bugs and feature requests.
 
 ## License
 
-(To be determined)
+MIT License (see LICENSE file)
 
 ## Support
 
